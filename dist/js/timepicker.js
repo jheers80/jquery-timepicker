@@ -1,7 +1,7 @@
 /*!
- * @todo 日期选择器  
+ * @todo
  * @author wanhappy@163.com
- * 使用方法 $('input').timepicker(); 
+ * $('input').timepicker(); 
 **/
  ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -38,11 +38,11 @@ var minuteStr = new Array( 12 ).fill( null ).map(function(t,i){
 	return  '<li class="cell-2 js-minute-cell" data-val="' + val + '">' + val + '</li>';
 }).join('');
 
-var content = $('<div class="timepicker"><div v-show class="title">请选择</div><div class='+
+var content = $('<div class="timepicker"><div v-show class="title"></div><div class='+
 			'"chose-all"><div class="handle"><div class="cell-4"><a class="icon icon-angle-up icon-2x '+
 			'js-plus-houer"></a></div><div class="cell-2"></div><div class="cell-4"><a class="icon icon-angle-up '+
 			'icon-2x js-plus-minute"></a></div></div><div class="text"><div class="cell-4"><a class="js-hour-show" '+
-			'title="选择时"></a></div><div class="cell-2">:</div><div class="cell-4"><a class="js-minute-show" title="选择分">'+
+			'title=""></a></div><div class="cell-2">:</div><div class="cell-4"><a class="js-minute-show" title="">'+
 			'</a></div></div><div class="handle"><div class="cell-4"><a class="icon icon-angle-down icon-2x js-minus-houer"></a>'+
 			'</div><div class="cell-2"></div><div class="cell-4"><a class="icon icon-angle-down icon-2x js-minus-minute"></a></div>'+
 			'</div></div><div class="chose-hour"><ul class="handle">' + hourStr + '</ul></div><div class="chose-minute"><ul class="handle">' + 
@@ -56,7 +56,7 @@ timepicker.choseHour = content.find('.chose-hour');
 timepicker.hourShow = content.find('.js-hour-show');
 timepicker.minuteShow = content.find('.js-minute-show');
 
-// 更新时间
+// 
 timepicker.update = function () {
 	this.inputTarget.val( twobit( this.hour ) + ':' + twobit( this.minute ) );
 	this.minuteShow.text( twobit( this.minute ) );
@@ -65,12 +65,12 @@ timepicker.update = function () {
 	return this;
 };
 
-// 事件绑定
+//
 timepicker.bindEvent = function () {
 	var thisTimePicker = this;
 	if( thisTimePicker.hasBind ) return;
 	thisTimePicker.hasBind = true;
-	// 分钟--
+	// 
 	this.content.on('click','.js-minus-minute',function() {
 		var minute = thisTimePicker.minute;
 		if( minute <= 0 ){
@@ -80,7 +80,7 @@ timepicker.bindEvent = function () {
 		}
 		thisTimePicker.update();
 	
-	// 分钟++
+	// 
 	}).on('click','.js-plus-minute',function() {
 		var minute = thisTimePicker.minute;
 		if( minute >= 59 ){
@@ -91,7 +91,7 @@ timepicker.bindEvent = function () {
 
 		thisTimePicker.update();
 	// 
-	// 小时++
+	// 
 	}).on('click','.js-plus-houer',function() {
 		var hour = thisTimePicker.hour;
 		if( hour >= 23 ){
@@ -101,7 +101,7 @@ timepicker.bindEvent = function () {
 		}
 		thisTimePicker.update();
 	
-	// 小时--
+	// 
 	}).on('click','.js-minus-houer',function() {
 		var hour = thisTimePicker.hour;
 		if( hour <= 0 ){
@@ -111,7 +111,7 @@ timepicker.bindEvent = function () {
 		}
 		thisTimePicker.update();
 	
-	// 选择分钟
+	// 
 	}).on('click','.js-minute-cell',function () {
 		thisTimePicker.minute = +this.getAttribute('data-val');
 		thisTimePicker.update();
@@ -119,26 +119,26 @@ timepicker.bindEvent = function () {
 		thisTimePicker.choseAll.show();
 		thisTimePicker.title.text('请选择');
 	
-	// 选择小时
+	// 
 	}).on('click','.js-hour-cell',function () {
 		thisTimePicker.hour = +this.getAttribute('data-val');
 		thisTimePicker.update();
 		thisTimePicker.choseHour.hide();
 		thisTimePicker.choseAll.show();
 		thisTimePicker.title.text('请选择');
-	// 阻止冒泡
+	// 
 	}).on('click',function(e) {
 		e.stopPropagation();
 	});
 
-	// 切换到选择小时
+	// 
 	thisTimePicker.hourShow.on('click',function() {
 		thisTimePicker.choseAll.hide();
 		thisTimePicker.choseHour.show();
 		thisTimePicker.title.text('请选择小时');
 	});
 
-	// 切换到选择分钟
+	// 
 	thisTimePicker.minuteShow.on('click',function() {
 		thisTimePicker.choseAll.hide();
 		thisTimePicker.choseMinute.show();
@@ -146,10 +146,10 @@ timepicker.bindEvent = function () {
 	});
 };
 
-// 将时间选择对象挂载到$上
+// 
 $.timepicker = timepicker;
 
-// 为jquery增加timepicket功能
+// 
 $.fn.timepicker = function( option ) {
 	var t = this;
 	var hour;
@@ -162,14 +162,14 @@ $.fn.timepicker = function( option ) {
 		});
 		return t;
 	}
-	// 元素应该是input
+	// input
 	if( !this[0].nodeName || this[0].nodeName !== 'INPUT' ){
 		return;
 	}
-	// 防止报错
+	// 
 	this.$timepickerUpdate = nullFun;
 	
-	// 事件绑定
+	// 
 	this.off('click').on('click',function(e) {
 		var val = this.value;
 		if( regTime.test( val ) ){
