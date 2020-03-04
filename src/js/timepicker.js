@@ -1,15 +1,15 @@
 
 'use strict';
 
-// 单个位数前加0  
+// pad 0 function  
 var twobit = function( num ) {
 	return num >= 10 ? num + '' : '0' + num;
 };
-// 检测时间是否符合要求
+// define regex
 var regTime = /^[0-9]{1,2}:[0-9]{1,2}$/;
 var timepicker = {};
 
-// 空函数
+// empty function
 var nullFun = function () {};
 
 // 小时
