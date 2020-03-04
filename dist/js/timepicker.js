@@ -15,24 +15,24 @@
 
 'use strict';
 
-// 单个位数前加0  
+// pad 0 
 var twobit = function( num ) {
 	return num >= 10 ? num + '' : '0' + num;
 };
-// 检测时间是否符合要求
+// 
 var regTime = /^[0-9]{1,2}:[0-9]{1,2}$/;
 var timepicker = {};
 
-// 空函数
+// 
 var nullFun = function () {};
 
-// 小时
+// 
 var hourStr = new Array( 24 ).fill( null ).map(function(t,i){
 	var val = twobit( i ); 
 	return '<li class="cell-2 js-hour-cell" data-val="' + val + '">' + val + '</li>';
 }).join('');
 
-// 分钟
+// 
 var minuteStr = new Array( 12 ).fill( null ).map(function(t,i){
 	var val = twobit( i *5 ); 
 	return  '<li class="cell-2 js-minute-cell" data-val="' + val + '">' + val + '</li>';
@@ -125,7 +125,7 @@ timepicker.bindEvent = function () {
 		thisTimePicker.update();
 		thisTimePicker.choseHour.hide();
 		thisTimePicker.choseAll.show();
-		thisTimePicker.title.text('请选择');
+		thisTimePicker.title.text('');
 	// 
 	}).on('click',function(e) {
 		e.stopPropagation();
@@ -135,14 +135,14 @@ timepicker.bindEvent = function () {
 	thisTimePicker.hourShow.on('click',function() {
 		thisTimePicker.choseAll.hide();
 		thisTimePicker.choseHour.show();
-		thisTimePicker.title.text('请选择小时');
+		thisTimePicker.title.text('');
 	});
 
 	// 
 	thisTimePicker.minuteShow.on('click',function() {
 		thisTimePicker.choseAll.hide();
 		thisTimePicker.choseMinute.show();
-		thisTimePicker.title.text('请选择分钟');
+		thisTimePicker.title.text('');
 	});
 };
 
